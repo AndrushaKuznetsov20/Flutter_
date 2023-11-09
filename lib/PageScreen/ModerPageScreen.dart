@@ -116,7 +116,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
                         ),
                       ),
                       Text(
-                        'Условия и требования:',
+                        'Условия и требованияв:',
                         style: TextStyle(
                           color: Colors.black,
                         ),

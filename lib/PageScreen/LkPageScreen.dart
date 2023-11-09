@@ -42,7 +42,7 @@ class _LkPageScreenState extends State<LkPageScreen> {
       throw Exception('Ошибка загрузки пользователя!');
     }
   }
-
+//dfdf
   @override
   Widget build(BuildContext context) {
       return Scaffold(

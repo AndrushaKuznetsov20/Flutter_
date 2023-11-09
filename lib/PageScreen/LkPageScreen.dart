@@ -62,7 +62,11 @@ class _LkPageScreenState extends State<LkPageScreen> {
               SizedBox(height: 8,),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => HomeScreen(),
+                    ),
+                  );
                 },
                 child: Text('Выйти'),
               ),

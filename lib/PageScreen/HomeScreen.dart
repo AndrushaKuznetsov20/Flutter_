@@ -22,6 +22,7 @@ class HomeScreen extends StatelessWidget {
               },
               child: Text('Авторизация'),
             ),
+            SizedBox(height: 8,),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(

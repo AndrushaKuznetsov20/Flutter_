@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled5/Models/ModelUser.dart';
 import 'dart:convert';
 
-import 'package:untitled5/PageScreen/UserPageScreen.dart';
+import 'HomeScreen.dart';
 
 class LkPageScreen extends StatefulWidget {
   @override
@@ -21,9 +21,15 @@ class _LkPageScreenState extends State<LkPageScreen> {
     fingByUser();
   }
 
+  Future<int?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('userId');
+  }
+
   Future<void> fingByUser() async
   {
-    final response = await http.get(Uri.parse('http://172.20.10.3:8092/api_users/user/'));
+    int? userId = await getUserId();
+    final response = await http.get(Uri.parse('http://172.20.10.3:8092/api_users/user/$userId'));
     if (response.statusCode == 200)
     {
       final jsonData = jsonDecode(response.body);
@@ -51,8 +57,15 @@ class _LkPageScreenState extends State<LkPageScreen> {
               Text('Личный идентификатор: ${user?.id}'),
               Text('Имя: ${user?.name}'),
               Text('Email: ${user?.email}'),
-              Text('Email: ${user?.active}'),
-              // Добавьте другие поля пользователя здесь
+              Text('Активность: ${user?.active}'),
+              Text('Роль: ${user?.roles}'),
+              SizedBox(height: 8,),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
+                },
+                child: Text('Выйти'),
+              ),
             ],
           ),
         ),

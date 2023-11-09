@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:untitled5/PageScreen/AnnouncementPageScreen.dart';
-import 'package:untitled5/PageScreen/HomeScreen.dart';
 import 'package:untitled5/PageScreen/LkPageScreen.dart';
 
 class UserPageScreen extends StatelessWidget {
@@ -131,12 +129,6 @@ class PlaceholderWidget extends StatelessWidget {
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AnnouncementPageScreen()),);
               },
               child: Text('Перейти к списку объявлений!'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen()),);
-              },
-              child: Text('Выйти'),
             ),
           ],
           if(index == 1) ...[

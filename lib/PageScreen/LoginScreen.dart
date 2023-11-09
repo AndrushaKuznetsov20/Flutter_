@@ -69,6 +69,15 @@ class LoginScreen extends StatelessWidget {
        List roles = modelLogin.roles;
        int userId = modelLogin.id;
 
+       Future<void> saveUserId(int userId) async {
+         final prefs = await SharedPreferences.getInstance();
+         await prefs.setInt('userId', userId);
+       }
+      saveUserId(userId);
+
+       // SharedPreferences prefs = await SharedPreferences.getInstance();
+       // await prefs.setInt('id', userId);
+
        for (String role in roles)
        {
          if (role == 'ROLE_USER')

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:untitled5/PageScreen/AnnouncementPageScreen.dart';
 import 'package:untitled5/PageScreen/LkPageScreen.dart';
@@ -69,7 +70,10 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
+Future<int?> getUserId() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getInt('userId');
+}
 class PlaceholderWidget extends StatelessWidget {
   final Color color;
   final String text;
@@ -84,11 +88,12 @@ class PlaceholderWidget extends StatelessWidget {
 
   Future<void> add(BuildContext context) async
   {
+    int? userId = await getUserId();
     String name = announcementNameController.text;
     String description = announcementDescriptionController.text;
     String conditions_and_requirements= announcementConditions_and_requirementsController.text;
 
-    final url = Uri.parse('http://172.20.10.3:8092/api_announcements/addAnnouncements');
+    final url = Uri.parse('http://172.20.10.3:8092/api_announcements/addAnnouncements/$userId');
     final headers = {'Content-Type': 'application/json'};
     final body = jsonEncode({
       'name': name,

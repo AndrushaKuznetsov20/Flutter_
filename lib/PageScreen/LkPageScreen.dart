@@ -42,7 +42,7 @@ class _LkPageScreenState extends State<LkPageScreen> {
       throw Exception('Ошибка загрузки пользователя!');
     }
   }
-//dfdf
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(
@@ -57,6 +57,7 @@ class _LkPageScreenState extends State<LkPageScreen> {
               Text('Личный идентификатор: ${user?.id}'),
               Text('Имя: ${user?.name}'),
               Text('Email: ${user?.email}'),
+              Text('Email: ${user?.numberPhone}'),
               Text('Активность: ${user?.active}'),
               Text('Роль: ${user?.roles}'),
               SizedBox(height: 8,),

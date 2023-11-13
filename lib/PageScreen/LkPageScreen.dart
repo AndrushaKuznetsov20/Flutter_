@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled5/Models/ModelUser.dart';
 import 'package:untitled5/PageScreen/MyAnnouncement.dart';
+import 'package:untitled5/PageScreen/MyResponses.dart';
 import 'dart:convert';
 
 import 'HomeScreen.dart';
@@ -80,6 +81,7 @@ class _LkPageScreenState extends State<LkPageScreen> {
                 child: Text('Выйти'),
               ),
               // if(role == "ROLE_USER")...[
+              SizedBox(height: 8,),
                 ElevatedButton(
                   onPressed: () {
                     //for(String role in user!.roles) {
@@ -94,6 +96,21 @@ class _LkPageScreenState extends State<LkPageScreen> {
                   },
                   child: Text('Мои объявления'),
                 ),
+              SizedBox(height: 8,),
+              ElevatedButton(
+                onPressed: () {
+                  //for(String role in user!.roles) {
+                  //if(role == "ROLE_USER")[
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => MyResponses(),
+                    ),
+                  );
+                  // ];
+                  //}
+                },
+                child: Text('Избранное'),
+              ),
             ],
             // ]
           ),

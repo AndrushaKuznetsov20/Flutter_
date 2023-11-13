@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:untitled5/Models/ModelAnnouncement.dart';
+import 'package:untitled5/PageScreen/LkPageScreen.dart';
 import 'package:untitled5/PageScreen/UserPageScreen.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 
@@ -34,6 +35,17 @@ class MyAnnouncementState extends State<MyAnnouncement> {
       });
     }
   }
+  Future<void> deleteAnnouncement(int? announcementId) async {
+    final response = await http.delete(Uri.parse('http://172.20.10.3:8092/api_announcements/delete/$announcementId'));
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.body),
+        ),
+      );
+    }
+    addAnnouncement();
+  }
   @override
   void initState() {
     super.initState();
@@ -49,7 +61,7 @@ class MyAnnouncementState extends State<MyAnnouncement> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserPageScreen()),);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LkPageScreen()),);
             },
           ),
         ),
@@ -67,7 +79,7 @@ class MyAnnouncementState extends State<MyAnnouncement> {
                       Text(
                         utf8.decode(data.name.codeUnits),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -75,25 +87,26 @@ class MyAnnouncementState extends State<MyAnnouncement> {
                       Text(
                         utf8.decode(data.description.codeUnits),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       Text(
                         'Условия и требования:',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       Text(
                         utf8.decode(data.conditions_and_requirements.codeUnits),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       SizedBox(height: 8),
                       ElevatedButton(
                         child: Text('Удалить'),
                         onPressed: () {
+                            deleteAnnouncement(data?.id);
                         },
                       ),
                     ],

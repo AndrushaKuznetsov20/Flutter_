@@ -75,11 +75,15 @@ class _LkPageScreenState extends State<LkPageScreen> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => MyAnnouncement(),
-                    ),
-                  );
+                  //for(String role in user!.roles) {
+                    //if(role == "ROLE_USER")[
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => MyAnnouncement(),
+                      ),
+                    );
+                   // ];
+                  //}
                 },
                 child: Text('Мои объявления'),
               ),

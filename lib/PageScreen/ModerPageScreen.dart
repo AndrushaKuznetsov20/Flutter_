@@ -35,7 +35,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
       });
     }
   }
-  Future<void> moderData(int id) async {
+  Future<void> moderData(int id,BuildContext context) async {
     final response = await http.put(Uri.parse('http://172.20.10.3:8092/api_announcements/moder/$id'));
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -52,7 +52,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
       );
     }
   }
-  Future<void> blockData(int id) async {
+  Future<void> blockData(int id,BuildContext context) async {
     final response = await http.put(Uri.parse('http://172.20.10.3:8092/api_announcements/block/$id'));
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -131,13 +131,13 @@ class ModerPageScreenState extends State<ModerPageScreen> {
                       ElevatedButton(
                         child: Text('Модерировать'),
                         onPressed: () {
-                          moderData(data.id);
+                          moderData(data.id,context);
                         },
                       ),
                       ElevatedButton(
                         child: Text('Заблокировать'),
                         onPressed: () {
-                          blockData(data.id);
+                          blockData(data.id,context);
                         },
                       ),
                     ],

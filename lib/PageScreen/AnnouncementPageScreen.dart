@@ -34,7 +34,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
       });
     }
   }
-  Future<void> addResponse(int? announcementId) async {
+  Future<void> addResponse(int? announcementId, BuildContext context) async {
     int? userId = await getUserId();
     final response = await http.post(Uri.parse('http://172.20.10.3:8092/api_responses/addResponses/$announcementId/$userId'));
     if (response.statusCode == 200) {
@@ -112,7 +112,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                       ElevatedButton(
                         child: Text('Отклик'),
                         onPressed: () {
-                          addResponse(data.id);
+                          addResponse(data.id, context);
                         },
                       ),
                     ],

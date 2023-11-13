@@ -17,7 +17,7 @@ class ModelUser {
         email: json['email'],
         numberPhone: json['numberPhone'],
         active: json['active'],
-        roles: json['roles']
+        roles: json['roles'],
     );
   }
 }

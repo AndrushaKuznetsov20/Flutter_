@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled5/Models/ModelUser.dart';
+import 'package:untitled5/PageScreen/MyAnnouncement.dart';
 import 'dart:convert';
 
 import 'HomeScreen.dart';
@@ -60,6 +61,7 @@ class _LkPageScreenState extends State<LkPageScreen> {
               Text('Email: ${user?.numberPhone}'),
               Text('Активность: ${user?.active}'),
               Text('Роль: ${user?.roles}'),
+              // Text('Объявления: ${user?.announcements}'),
               SizedBox(height: 8,),
               ElevatedButton(
                 onPressed: () {
@@ -70,6 +72,16 @@ class _LkPageScreenState extends State<LkPageScreen> {
                   );
                 },
                 child: Text('Выйти'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => MyAnnouncement(),
+                    ),
+                  );
+                },
+                child: Text('Мои объявления'),
               ),
             ],
           ),

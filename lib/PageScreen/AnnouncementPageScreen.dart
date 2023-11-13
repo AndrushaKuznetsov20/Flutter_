@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:untitled5/Models/ModelAnnouncement.dart';
 import 'package:untitled5/PageScreen/UserPageScreen.dart';
@@ -20,6 +21,10 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
 
   List<ModelAnnouncement> dataList = [];
 
+  Future<int?> getUserId() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('userId');
+  }
   Future<void> addAnnouncement() async {
     final response = await http.get(Uri.parse('http://172.20.10.3:8092/api_announcements/announcements_status_ok'));
     if (response.statusCode == 200) {
@@ -27,6 +32,17 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
       setState(() {
         dataList = List<ModelAnnouncement>.from(jsonData.map((data) => ModelAnnouncement.fromJson(data)));
       });
+    }
+  }
+  Future<void> addResponse(int? announcementId) async {
+    int? userId = await getUserId();
+    final response = await http.post(Uri.parse('http://172.20.10.3:8092/api_responses/addResponses/$announcementId/$userId'));
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.body),
+        ),
+      );
     }
   }
   @override
@@ -96,6 +112,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                       ElevatedButton(
                         child: Text('Отклик'),
                         onPressed: () {
+                          addResponse(data.id);
                         },
                       ),
                     ],

@@ -27,6 +27,11 @@ class _LkPageScreenState extends State<LkPageScreen> {
     return prefs.getInt('userId');
   }
 
+  // Future<String?> getUserRole() async {
+  //   final prefsRole = await SharedPreferences.getInstance();
+  //   return prefsRole.getString('role');
+  // }
+
   Future<void> fingByUser() async
   {
     int? userId = await getUserId();
@@ -46,6 +51,7 @@ class _LkPageScreenState extends State<LkPageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // String? role = getUserRole().toString();
       return Scaffold(
         appBar: AppBar(
           title: Text('Профиль'),
@@ -73,21 +79,23 @@ class _LkPageScreenState extends State<LkPageScreen> {
                 },
                 child: Text('Выйти'),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  //for(String role in user!.roles) {
-                    //if(role == "ROLE_USER")[
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => MyAnnouncement(),
-                      ),
-                    );
-                   // ];
-                  //}
-                },
-                child: Text('Мои объявления'),
-              ),
+              // if(role == "ROLE_USER")...[
+                ElevatedButton(
+                  onPressed: () {
+                    //for(String role in user!.roles) {
+                      //if(role == "ROLE_USER")[
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => MyAnnouncement(),
+                        ),
+                      );
+                     // ];
+                    //}
+                  },
+                  child: Text('Мои объявления'),
+                ),
             ],
+            // ]
           ),
         ),
       );

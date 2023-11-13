@@ -99,6 +99,11 @@ class LoginScreen extends StatelessWidget {
              MaterialPageRoute(builder: (context) => ModerPageScreen()),
            );
          }
+         // Future<void> saveUserRole(String role) async {
+         //   final prefsRole = await SharedPreferences.getInstance();
+         //   await prefsRole.setString('role', role);
+         // }
+         // saveUserRole("ROLE_USER");
        }
      }
   }

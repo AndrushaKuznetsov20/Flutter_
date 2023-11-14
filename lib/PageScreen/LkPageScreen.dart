@@ -52,7 +52,6 @@ class _LkPageScreenState extends State<LkPageScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // String? role = getUserRole().toString();
       return Scaffold(
         appBar: AppBar(
           title: Text('Профиль'),
@@ -80,23 +79,21 @@ class _LkPageScreenState extends State<LkPageScreen> {
                 },
                 child: Text('Выйти'),
               ),
-              // if(role == "ROLE_USER")...[
+            if(user != null && user!.roles.contains("ROLE_USER"))...[
               SizedBox(height: 8,),
-                ElevatedButton(
-                  onPressed: () {
-                    //for(String role in user!.roles) {
-                      //if(role == "ROLE_USER")[
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => MyAnnouncement(),
-                        ),
-                      );
-                     // ];
-                    //}
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => MyAnnouncement(),
+                    ),
+                  );
                   },
-                  child: Text('Мои объявления'),
-                ),
+                child: Text('Мои объявления'),
+              ),
+              ],
               SizedBox(height: 8,),
+              if(user != null && user!.roles.contains("ROLE_USER"))...[
               ElevatedButton(
                 onPressed: () {
                   //for(String role in user!.roles) {
@@ -111,8 +108,8 @@ class _LkPageScreenState extends State<LkPageScreen> {
                 },
                 child: Text('Избранное'),
               ),
-            ],
-            // ]
+               ],
+            ]
           ),
         ),
       );

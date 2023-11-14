@@ -35,6 +35,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
       });
     }
   }
+
   Future<void> moderData(int id,BuildContext context) async {
     final response = await http.put(Uri.parse('http://172.20.10.3:8092/api_announcements/moder/$id'));
     if (response.statusCode == 200) {
@@ -52,6 +53,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
       );
     }
   }
+
   Future<void> blockData(int id,BuildContext context) async {
     final response = await http.put(Uri.parse('http://172.20.10.3:8092/api_announcements/block/$id'));
     if (response.statusCode == 200) {
@@ -134,6 +136,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
                           moderData(data.id,context);
                         },
                       ),
+                      SizedBox(height: 8),
                       ElevatedButton(
                         child: Text('Заблокировать'),
                         onPressed: () {

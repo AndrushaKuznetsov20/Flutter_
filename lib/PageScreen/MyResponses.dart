@@ -77,8 +77,10 @@ class MyResponsestState extends State<MyResponses> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Объявление: ${data?.announcement}'),
-                    Text('Пользователь: ${data?.user_response}'),
+                    Text('Объявление:'),
+                    Text('Наименование ${utf8.decode(data!.announcement.name.codeUnits)}'),
+                    Text('Описание ${utf8.decode(data!.announcement.description.codeUnits)}'),
+                    Text('Условия и требования ${utf8.decode(data!.announcement.conditions_and_requirements.codeUnits)}'),
                     SizedBox(height: 8),
                     ElevatedButton(
                       child: Text('Удалить'),

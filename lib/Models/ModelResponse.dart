@@ -1,8 +1,8 @@
 import 'dart:ffi';
 
 import 'package:untitled5/Models/ModelAnnouncement.dart';
+import 'package:untitled5/Models/ModelUser.dart';
 
-import 'ModelUser.dart';
 
 class ModelResponse {
   final int id;
@@ -14,8 +14,8 @@ class ModelResponse {
   factory ModelResponse.fromJson(Map<String, dynamic> json) {
     return ModelResponse(
       id: json['id'],
-      announcement: json['announcement'],
-      user_response: json['user_response'],
+      announcement: ModelAnnouncement.fromJson(json['announcement']),
+      user_response: ModelUser.fromJson(json['user_response']),
     );
   }
 }

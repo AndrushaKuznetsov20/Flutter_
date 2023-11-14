@@ -102,6 +102,18 @@ class MyAnnouncementState extends State<MyAnnouncement> {
                           color: Colors.black,
                         ),
                       ),
+                      Text(
+                        'Cтатус объявления:',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        utf8.decode(data.contract_status.codeUnits),
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                       SizedBox(height: 8),
                       ElevatedButton(
                         child: Text('Удалить'),

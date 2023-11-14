@@ -52,6 +52,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
         ),
       );
     }
+    addAnnouncement();
   }
 
   Future<void> blockData(int id,BuildContext context) async {
@@ -70,6 +71,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
         ),
       );
     }
+    addAnnouncement();
   }
   @override
   void initState() {
@@ -125,6 +127,18 @@ class ModerPageScreenState extends State<ModerPageScreen> {
                       ),
                       Text(
                         utf8.decode(data.conditions_and_requirements.codeUnits),
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        'Статус:',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      Text(
+                        utf8.decode(data.contract_status.codeUnits),
                         style: TextStyle(
                           color: Colors.black,
                         ),

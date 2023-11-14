@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:untitled5/Models/ModelAnnouncement.dart';
+import 'package:untitled5/Models/ModelUser.dart';
 import 'package:untitled5/PageScreen/LkPageScreen.dart';
 import 'package:untitled5/PageScreen/UserPageScreen.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
@@ -16,6 +17,7 @@ class MyAnnouncement extends StatefulWidget {
 
 class MyAnnouncementState extends State<MyAnnouncement> {
   ModelAnnouncement? announcement;
+  ModelUser? user;
 
   Future<int?> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -121,6 +123,14 @@ class MyAnnouncementState extends State<MyAnnouncement> {
                             deleteAnnouncement(data?.id);
                         },
                       ),
+                      SizedBox(height: 15),
+                      Text(
+                        'Отклики:',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    Text('Пользователи: ${data?.list_users.map((user) => user.name).join(', ')}'),
                     ],
                   ),
                 ),

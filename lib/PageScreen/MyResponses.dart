@@ -47,6 +47,17 @@ class MyResponsestState extends State<MyResponses> {
     }
     listMyResponse();
   }
+  Future<void> deleteResponse(int? announcementId) async {
+    final response = await http.delete(Uri.parse('http://172.20.10.3:8092/api_responses/delete/$announcementId'));
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(response.body),
+        ),
+      );
+    }
+    listMyResponse();
+  }
   @override
   void initState() {
     super.initState();
@@ -85,7 +96,7 @@ class MyResponsestState extends State<MyResponses> {
                     ElevatedButton(
                       child: Text('Удалить'),
                       onPressed: () {
-                        deleteAnnouncement(data?.id);
+                        deleteResponse(data?.id);
                       },
                     ),
                   ],

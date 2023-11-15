@@ -17,7 +17,6 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
 
   final url = Uri.parse('http://172.20.10.3:8092/api_announcements/announcements_status_ok');
   final headers = {'Content-Type': 'application/json'};
-  bool isColor = false;
 
   List<ModelAnnouncement> dataList = [];
 
@@ -69,14 +68,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
           itemBuilder: (context, index) {
             final data = dataList[index];
             return Card(
-              color: isColor ? Colors.red : Colors.teal,
               elevation: 15,
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    isColor = !isColor;
-                  });
-                },
                 child: Padding(
                   padding: EdgeInsets.all(25),
                   child: Column(
@@ -85,7 +77,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                       Text(
                         utf8.decode(data.name.codeUnits),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -93,19 +85,19 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                       Text(
                         utf8.decode(data.description.codeUnits),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       Text(
                         'Условия и требования:',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       Text(
                         utf8.decode(data.conditions_and_requirements.codeUnits),
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                       ),
                       SizedBox(height: 8),
@@ -118,9 +110,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                     ],
                   ),
                 ),
-              ),
-            );
-
+              );
           },
         ),
       ),

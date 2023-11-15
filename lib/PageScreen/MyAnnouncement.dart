@@ -130,7 +130,7 @@ class MyAnnouncementState extends State<MyAnnouncement> {
                           color: Colors.black,
                         ),
                       ),
-                    Text('Пользователи: ${data?.list_users.map((user) => user.name).join(', ')}'),
+                    Text('Пользователи: ${data?.list_users.map((user) => user['name']).join(', ')}, ${data?.list_users.map((user) => user['numberPhone']).join(', ')}'),
                     ],
                   ),
                 ),

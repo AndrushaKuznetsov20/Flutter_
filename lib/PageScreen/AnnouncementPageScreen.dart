@@ -49,9 +49,13 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
     super.initState();
     addAnnouncement();
   }
-
+  // _blockButton() async{
+  //   int? user = 0;
+  //   user = await getUserId();
+  //   return user;
+  // }
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -100,6 +104,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                           color: Colors.black,
                         ),
                       ),
+                      // if(data.user.id != _blockButton())...[
                       SizedBox(height: 8),
                       ElevatedButton(
                         child: Text('Отклик'),
@@ -108,6 +113,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                         },
                       ),
                     ],
+            // ]
                   ),
                 ),
               );

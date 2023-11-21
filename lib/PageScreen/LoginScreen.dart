@@ -15,7 +15,8 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text('Авторизация'),
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -25,7 +26,7 @@ class LoginScreen extends StatelessWidget {
             TextField(
               controller: usernameController,
               decoration: InputDecoration(
-                labelText: 'Username',
+                labelText: 'Введите имя',
               ),
             ),
             SizedBox(height: 16.0),
@@ -33,7 +34,7 @@ class LoginScreen extends StatelessWidget {
               controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
-                labelText: 'Password',
+                labelText: 'Введите пароль',
               ),
             ),
             SizedBox(height: 16.0),
@@ -41,7 +42,7 @@ class LoginScreen extends StatelessWidget {
               onPressed: () {
                 login(context);
               },
-              child: Text('Login'),
+              child: Text('Войти'),
             ),
           ],
         ),

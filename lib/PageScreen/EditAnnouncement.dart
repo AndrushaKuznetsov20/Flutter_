@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled5/PageScreen/MyAnnouncement.dart';
+import 'package:untitled5/PageScreen/UserPageScreen.dart';
 
 class EditAnnouncement extends StatefulWidget {
 
@@ -52,12 +53,20 @@ class _EditAnnouncementState extends State<EditAnnouncement> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Редактирование объявления'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyAnnouncement()),);
-          },
-        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyAnnouncement()),);
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserPageScreen()),);
+            },
+          ),
+        ],
 
       ),
       body: Padding(
@@ -67,6 +76,7 @@ class _EditAnnouncementState extends State<EditAnnouncement> {
           children: [
             TextField(
           controller: idAnnouncementController,
+              enabled: false,
           decoration: InputDecoration(
             labelText: 'Идентификатор объявления',
           ),

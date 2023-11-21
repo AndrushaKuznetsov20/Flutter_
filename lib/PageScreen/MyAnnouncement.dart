@@ -10,6 +10,8 @@ import 'package:untitled5/PageScreen/LkPageScreen.dart';
 import 'package:untitled5/PageScreen/UserPageScreen.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 
+import 'EditAnnouncement.dart';
+
 class MyAnnouncement extends StatefulWidget {
   @override
   MyAnnouncementState createState() => MyAnnouncementState();
@@ -121,6 +123,14 @@ class MyAnnouncementState extends State<MyAnnouncement> {
                         child: Text('Удалить'),
                         onPressed: () {
                             deleteAnnouncement(data?.id);
+                        },
+                      ),
+                      SizedBox(height: 15),
+                      ElevatedButton(
+                        child: Text('Редактировать'),
+                        onPressed: () {
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditAnnouncement(id: data.id,nameAnnouncement:
+                          utf8.decode(data.name.codeUnits),descriptionAnnouncement:utf8.decode(data.description.codeUnits),conditions:utf8.decode(data.conditions_and_requirements.codeUnits))),);
                         },
                       ),
                       SizedBox(height: 15),

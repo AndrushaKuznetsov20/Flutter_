@@ -89,6 +89,13 @@ class MyAnnouncementState extends State<MyAnnouncement> {
                       ),
                       SizedBox(height: 8),
                       Text(
+                        'Описание:',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
                         utf8.decode(data.description.codeUnits),
                         style: TextStyle(
                           color: Colors.black,

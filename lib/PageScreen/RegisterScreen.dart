@@ -91,7 +91,7 @@ class RegisterScreen extends StatelessWidget {
      context: context,
      builder: (context) => AlertDialog(
        title: Text('Ошибка!'),
-       content: Text('Регистрация не удалась!'),
+       content: Text('Пользователь с таким именем уже существует!'),
        actions: [
          TextButton(
            onPressed: () {

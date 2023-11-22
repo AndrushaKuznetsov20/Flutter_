@@ -107,5 +107,22 @@ class LoginScreen extends StatelessWidget {
          // saveUserRole("ROLE_USER");
        }
      }
+     else{
+       showDialog(
+         context: context,
+         builder: (context) => AlertDialog(
+           title: Text('Ошибка!'),
+           content: Text('Неверный логин или пароль!'),
+           actions: [
+             TextButton(
+               onPressed: () {
+                 Navigator.pop(context);
+               },
+               child: Text('OK'),
+             ),
+           ],
+         ),
+       );
+     }
   }
 }

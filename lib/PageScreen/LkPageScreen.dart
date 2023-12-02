@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,23 +32,36 @@ class _LkPageScreenState extends State<LkPageScreen> {
     return prefs.getInt('userId');
   }
 
-  Future<void> uploadImage() async {
+  Future<void> displayAvatar() async {
     int? userId = await getUserId();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      final file = File(pickedFile.path);
-      var request = http.MultipartRequest('POST', Uri.parse('http://172.20.10.3:8092/api_users/user/$userId/avatar'));
-      request.files.add(await http.MultipartFile.fromPath('file', file.path));
-      var response = await request.send();
-      if (response.statusCode == 200) {
-        setState(() {
-          avatarUrl = 'http://172.20.10.3:8092/api_users/user/$userId/avatar';
-        });
-      } else {
-        // Handle error
-      }
+    var response = await http.get(
+        Uri.parse('http://172.20.10.3:8092/api_users/user/$userId/getAvatar'));
+    if (response.statusCode == 200) {
+      setState(() {
+        avatarUrl = response.body;
+      });
+    } else {
+      // Handle error
     }
   }
+
+  // Future<void> uploadImage() async {
+  //   int? userId = await getUserId();
+  //   final pickedFile = await picker.getImage(source: ImageSource.gallery);
+  //   if (pickedFile != null) {
+  //     final file = File(pickedFile.path);
+  //     var request = http.MultipartRequest('PUT', Uri.parse('http://172.20.10.3:8092/api_users/user/$userId/avatar'));
+  //     request.files.add(await http.MultipartFile.fromPath('file', file.path));
+  //     var response = await request.send();
+  //     if (response.statusCode == 200)
+  //     {
+  //
+  //     } else {
+  //       // Handle error
+  //     }
+  //     displayAvatar();
+  //   }
+  // }
   // Future<String?> getUserRole() async {
   //   final prefsRole = await SharedPreferences.getInstance();
   //   return prefsRole.getString('role');
@@ -59,61 +70,73 @@ class _LkPageScreenState extends State<LkPageScreen> {
   Future<void> fingByUser() async
   {
     int? userId = await getUserId();
-    final response = await http.get(Uri.parse('http://172.20.10.3:8092/api_users/user/$userId'));
-    if (response.statusCode == 200)
-    {
+    final response = await http.get(
+        Uri.parse('http://172.20.10.3:8092/api_users/user/$userId'));
+    if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
       setState(() {
         user = ModelUser.fromJson(jsonData);
       });
     }
-    else
-    {
+    else {
       throw Exception('Ошибка загрузки пользователя!');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Профиль'),
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (avatarUrl.isNotEmpty)
-                Image.network(avatarUrl),
-              ElevatedButton(
-                onPressed: uploadImage,
-                child: Text('Обновить аватар'),
-              ),
-              // ElevatedButton(
-              //   onPressed: updateImage,
-              //   child: Text('Update Image'),
-              // ),
-              Text('Личный идентификатор: ${user?.id}'),
-              Text('Имя: ${user?.name}'),
-              Text('Email: ${user?.email}'),
-              Text('Email: ${user?.numberPhone}'),
-              Text('Активность: ${user?.active}'),
-              Text('Роль: ${user?.roles}'),
-              // Text('Объявления: ${user?.announcements}'),
-              SizedBox(height: 8,),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => HomeScreen(),
-                    ),
-                  );
-                },
-                child: Text('Выйти'),
-              ),
-            if(user != null && user!.roles.contains("ROLE_USER"))...[
-              SizedBox(height: 8,),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        title: Text('Профиль'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Личный идентификатор: ${user?.id}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Имя: ${user?.name}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Email: ${user?.email}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Номер телефона: ${user?.numberPhone}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Активность: ${user?.active}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Роль: ${user?.roles}',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => HomeScreen(),
+                  ),
+                );
+              },
+              child: Text('Выйти'),
+            ),
+            if (user != null && user!.roles.contains("ROLE_USER")) ...[
+              SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
@@ -121,30 +144,26 @@ class _LkPageScreenState extends State<LkPageScreen> {
                       builder: (context) => MyAnnouncement(),
                     ),
                   );
-                  },
+                },
                 child: Text('Мои объявления'),
               ),
-              ],
-              SizedBox(height: 8,),
-              if(user != null && user!.roles.contains("ROLE_USER"))...[
+            ],
+            if (user != null && user!.roles.contains("ROLE_USER")) ...[
+              SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {
-                  //for(String role in user!.roles) {
-                  //if(role == "ROLE_USER")[
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => MyResponses(),
                     ),
                   );
-                  // ];
-                  //}
                 },
                 child: Text('Избранное'),
               ),
-               ],
-            ]
-          ),
+            ],
+          ],
         ),
-      );
-    }
+      ),
+    );
   }
+}

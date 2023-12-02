@@ -61,6 +61,7 @@ class MyAnnouncementState extends State<MyAnnouncement> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.deepPurple,
           title: Text('Список объявлений'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),

@@ -69,6 +69,7 @@ class MyResponsestState extends State<MyResponses> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.deepPurple,
           title: Text('Список откликов'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),

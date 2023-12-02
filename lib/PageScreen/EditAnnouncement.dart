@@ -52,6 +52,7 @@ class _EditAnnouncementState extends State<EditAnnouncement> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
         title: Text('Редактирование объявления'),
         actions: [
           IconButton(

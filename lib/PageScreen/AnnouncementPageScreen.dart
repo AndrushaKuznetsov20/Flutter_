@@ -8,6 +8,8 @@ import 'package:untitled5/Models/ModelAnnouncement.dart';
 import 'package:untitled5/PageScreen/UserPageScreen.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 
+import '../Models/ModelUser.dart';
+
 class AnnouncementPageScreen extends StatefulWidget {
   @override
   AnnouncementPageScreenState createState() => AnnouncementPageScreenState();
@@ -19,6 +21,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
   final headers = {'Content-Type': 'application/json'};
 
   List<ModelAnnouncement> dataList = [];
+  ModelUser? user;
 
   Future<int?> getUserId() async {
     final prefs = await SharedPreferences.getInstance();
@@ -49,16 +52,17 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
     super.initState();
     addAnnouncement();
   }
-  // _blockButton() async{
-  //   int? user = 0;
-  //   user = await getUserId();
-  //   return user;
-  // }
+  _blockButton() async{
+    int? user = 0;
+    user = await getUserId();
+    return user;
+  }
   @override
   Widget build(BuildContext context){
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.deepPurple,
           title: Text('Список объявлений'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
@@ -104,19 +108,50 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                           color: Colors.black,
                         ),
                       ),
-                      // if(data.user.id != _blockButton())...[
-                      SizedBox(height: 8),
-                      ElevatedButton(
-                        child: Text('Отклик'),
-                        onPressed: () {
-                          addResponse(data.id, context);
+                      FutureBuilder<int?>(
+                        future: getUserId(),
+                        builder: (BuildContext context, AsyncSnapshot<int?> snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+                            if (snapshot.hasData) {
+                              int? userId = snapshot.data;
+                              return Column(
+                                  children: [
+                                    if(data.user?.id != userId)...[
+                                      SizedBox(height: 8),
+                                      ElevatedButton(
+                                        child: Text('Отклик'),
+                                        onPressed: () {
+                                          addResponse(data.id, context);
+                                        },
+                                      ),
+                                    ],
+                                    if(data.user?.id == userId) ...[
+                                      SizedBox(height: 8),
+                                      Container(
+                                        child: Text(
+                                          'Ваше объявление!',
+                                          style: TextStyle(color: Colors.red),
+                                        ),
+                                      ),
+                                    ],
+                                  ],
+                                );
+                          }
+                            else
+                            {
+                              return Text('Ошибка получения id пользователя');
+                            }
+                          }
+                          else
+                          {
+                              return CircularProgressIndicator(); // или любой другой индикатор загрузки
+                          }
                         },
                       ),
                     ],
-            // ]
                   ),
                 ),
-              );
+            );
           },
         ),
       ),

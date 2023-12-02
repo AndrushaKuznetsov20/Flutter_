@@ -13,7 +13,7 @@ class AdminPageSceen extends StatelessWidget
   {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
       ),
       home: AdminPageScreen(),
     );

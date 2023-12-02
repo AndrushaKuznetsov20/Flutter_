@@ -83,7 +83,8 @@ class ModerPageScreenState extends State<ModerPageScreen> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Список входящих объявлений'),
+          backgroundColor: Colors.deepPurple,
+          title: Text('Список объявлений',style: TextStyle(color: Colors.white)),
           actions: [
             IconButton(
               icon: Icon(Icons.account_circle),
@@ -105,46 +106,80 @@ class ModerPageScreenState extends State<ModerPageScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        utf8.decode(data.name.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Наименование: ',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.name.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ]
                       ),
                       SizedBox(height: 8),
-                      Text(
-                        utf8.decode(data.description.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Описание: ',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.description.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
-                      Text(
-                        'Условия и требованияв:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Text(
+                            'Условия и требованияв: ',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.conditions_and_requirements.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
-                      Text(
-                        utf8.decode(data.conditions_and_requirements.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        'Статус:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        utf8.decode(data.contract_status.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Text(
+                            'Статус:',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.contract_status.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
                       SizedBox(height: 8),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          onPrimary: Colors.white,
+                        ),
                         child: Text('Модерировать'),
                         onPressed: () {
                           moderData(data.id,context);
@@ -152,6 +187,10 @@ class ModerPageScreenState extends State<ModerPageScreen> {
                       ),
                       SizedBox(height: 8),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          onPrimary: Colors.white,
+                        ),
                         child: Text('Заблокировать'),
                         onPressed: () {
                           blockData(data.id,context);

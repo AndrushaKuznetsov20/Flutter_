@@ -90,7 +90,8 @@ class AdminPageScreenScreenState extends State<AdminPageScreen>
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Список пользователей'),
+          backgroundColor: Colors.deepPurple,
+          title: Text('Список пользователей', style: TextStyle(color: Colors.white)),
           actions: [
             IconButton(
               icon: Icon(Icons.account_circle),
@@ -113,56 +114,76 @@ class AdminPageScreenScreenState extends State<AdminPageScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 8),
-                      Text(
-                        'Имя:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Имя:',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.name.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        utf8.decode(data.name.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Email:',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.email.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Email:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      Row(
+                       children: [
+                          Text(
+                            'Активность:',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            (data.active.toString()),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
-                      Text(
-                        utf8.decode(data.email.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        'Активность:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        (data.active.toString()),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        'Роль:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        (data.roles.toString()),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Роль:',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            (data.roles.toString()),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
                       SizedBox(height: 8),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          onPrimary: Colors.white,
+                        ),
                         child: Text('Заблокировать'),
                         onPressed: () {
                           blockUser(data.id);
@@ -170,6 +191,10 @@ class AdminPageScreenScreenState extends State<AdminPageScreen>
                       ),
                       SizedBox(height: 8),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          onPrimary: Colors.white,
+                        ),
                         child: Text('Разблокировать'),
                         onPressed: () {
                           inBlockUser(data.id);
@@ -177,6 +202,10 @@ class AdminPageScreenScreenState extends State<AdminPageScreen>
                       ),
                       SizedBox(height: 8),
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.deepPurple,
+                          onPrimary: Colors.white,
+                        ),
                         onPressed: () {
                           showDialog(
                             context: context,

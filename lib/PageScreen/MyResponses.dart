@@ -70,7 +70,7 @@ class MyResponsestState extends State<MyResponses> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepPurple,
-          title: Text('Список откликов'),
+          title: Text('Список откликов',style: TextStyle(color: Colors.white)),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -95,6 +95,10 @@ class MyResponsestState extends State<MyResponses> {
                     Text('Условия и требования ${utf8.decode(data!.announcement.conditions_and_requirements.codeUnits)}'),
                     SizedBox(height: 8),
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple,
+                        onPrimary: Colors.white,
+                      ),
                       child: Text('Удалить'),
                       onPressed: () {
                         deleteResponse(data?.id);

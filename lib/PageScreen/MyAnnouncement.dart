@@ -62,7 +62,7 @@ class MyAnnouncementState extends State<MyAnnouncement> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepPurple,
-          title: Text('Список объявлений'),
+          title: Text('Список объявлений', style: TextStyle(color: Colors.white)),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -81,74 +81,126 @@ class MyAnnouncementState extends State<MyAnnouncement> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        utf8.decode(data.name.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Наименование: ',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.name.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ]
                       ),
                       SizedBox(height: 8),
-                      Text(
-                        'Описание:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Описание: ',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            utf8.decode(data.description.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
                       SizedBox(height: 8),
-                      Text(
-                        utf8.decode(data.description.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        'Условия и требования:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        utf8.decode(data.conditions_and_requirements.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        'Cтатус объявления:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        utf8.decode(data.contract_status.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Условия и требования: ',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.conditions_and_requirements.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
                       SizedBox(height: 8),
-                      ElevatedButton(
-                        child: Text('Удалить'),
-                        onPressed: () {
-                            deleteAnnouncement(data?.id);
-                        },
+                      Row(
+                        children: [
+                          Text(
+                            'Cтатус объявления:',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.contract_status.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.deepPurple,
+                                onPrimary: Colors.white,
+                              ),
+                              child: Text('Удалить'),
+                              onPressed: () {
+                                deleteAnnouncement(data?.id);
+                              },
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.deepPurple,
+                                onPrimary: Colors.white,
+                              ),
+                              child: Text('Редактировать'),
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => EditAnnouncement(
+                                      id: data.id,
+                                      nameAnnouncement: utf8.decode(data.name.codeUnits),
+                                      descriptionAnnouncement: utf8.decode(data.description.codeUnits),
+                                      conditions: utf8.decode(data.conditions_and_requirements.codeUnits),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                       SizedBox(height: 15),
-                      ElevatedButton(
-                        child: Text('Редактировать'),
-                        onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditAnnouncement(id: data.id,nameAnnouncement:
-                          utf8.decode(data.name.codeUnits),descriptionAnnouncement:utf8.decode(data.description.codeUnits),conditions:utf8.decode(data.conditions_and_requirements.codeUnits))),);
-                        },
-                      ),
-                      SizedBox(height: 15),
                       Text(
-                        'Отклики:',
+                        'Список пользователей, которые оставили свой отклик:',
                         style: TextStyle(
                           color: Colors.black,
                         ),
                       ),
-                    Text('Пользователи: ${data?.list_users.map((user) => user['name']).join(', ')}, ${data?.list_users.map((user) => user['numberPhone']).join(', ')}'),
+                      Text(
+                        '\n${data?.list_users.map((user) => "${user['name']}-${user['numberPhone']}").join('\n')}\n',
+                        style: TextStyle(height: 1.5),
+                      ),
                     ],
                   ),
                 ),

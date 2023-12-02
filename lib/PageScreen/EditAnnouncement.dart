@@ -53,7 +53,7 @@ class _EditAnnouncementState extends State<EditAnnouncement> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text('Редактирование объявления'),
+        title: Text('Редактирование объявления',style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
             icon: Icon(Icons.arrow_back),
@@ -80,12 +80,14 @@ class _EditAnnouncementState extends State<EditAnnouncement> {
               enabled: false,
           decoration: InputDecoration(
             labelText: 'Идентификатор объявления',
+            labelStyle: TextStyle(color: Colors.deepPurple),
           ),
         ),
             TextField(
               controller: nameAnnouncementController,
               decoration: InputDecoration(
                 labelText: 'Наименование объявления',
+                labelStyle: TextStyle(color: Colors.deepPurple),
               ),
             ),
             SizedBox(height: 16.0),
@@ -93,6 +95,7 @@ class _EditAnnouncementState extends State<EditAnnouncement> {
               controller: descriptionAnnouncementController,
               decoration: InputDecoration(
                 labelText: 'Описание объявления',
+                labelStyle: TextStyle(color: Colors.deepPurple),
               ),
             ),
             SizedBox(height: 16.0),
@@ -100,10 +103,15 @@ class _EditAnnouncementState extends State<EditAnnouncement> {
               controller: conditionsAnnouncementController,
               decoration: InputDecoration(
                 labelText: 'Условия и требования',
+                labelStyle: TextStyle(color: Colors.deepPurple),
               ),
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                onPrimary: Colors.white,
+              ),
               onPressed: () {
                 editData(context);
               },

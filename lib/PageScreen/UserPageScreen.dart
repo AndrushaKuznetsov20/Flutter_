@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
   int _currentIndex = 0;
   
   final List<Widget> _children = [
-    PlaceholderWidget(color: Colors.red, text: 'Главная страница', index: 0),
+    PlaceholderWidget(color: Colors.red, text: '', index: 0),
     PlaceholderWidget(color: Colors.green, text: 'Страница создания объявления', index: 1),
   ];
 
@@ -42,7 +42,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text('Поиск вакансий'),
+        title: Text('Поиск вакансий',style: TextStyle(color: Colors.white)),
         actions: [
           IconButton(
             icon: Icon(Icons.account_circle),
@@ -56,6 +56,7 @@ class _HomeState extends State<Home> {
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
+        selectedItemColor: Colors.deepPurple,
         onTap: onTabTapped,
         items: [
           BottomNavigationBarItem(
@@ -130,11 +131,36 @@ class PlaceholderWidget extends StatelessWidget {
           ),
           SizedBox(height: 16.0),
           if(index == 0) ...[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AnnouncementPageScreen()),);
-              },
-              child: Text('Перейти к списку объявлений!'),
+            Container(
+              child: Row(
+                children: [
+                  Image.network(
+                    'https://sun6-20.userapi.com/s/v1/ig2/GolcmJFBPjSoP15Fzw-7icbKxxReKYBAHsDsy4QjoV-Un11unj0S6XAvk7V1BfNTDlGgVt_62371foFKE6MG1JZy.jpg?size=957x957&quality=95&crop=42,0,957,957&ava=1',
+                    width: 328,
+                    height: 375,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width:30),
+            Column(
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    fixedSize: Size(405, 35),
+                  ),
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AnnouncementPageScreen(),
+                      ),
+                    );
+                  },
+                  child: Text('Нажми, чтобы начать охоту за кадрами'),
+                ),
+              ],
             ),
           ],
           if(index == 1) ...[
@@ -142,6 +168,7 @@ class PlaceholderWidget extends StatelessWidget {
             TextField(
               controller: announcementNameController,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.deepPurple),
                 labelText: 'Наименование объявления:',
               ),
             ),
@@ -149,6 +176,7 @@ class PlaceholderWidget extends StatelessWidget {
               controller: announcementDescriptionController,
               maxLines: null,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.deepPurple),
                 labelText: 'Описание объявления:',
               ),
             ),
@@ -156,6 +184,7 @@ class PlaceholderWidget extends StatelessWidget {
               controller: announcementConditions_and_requirementsController,
               maxLines: null,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.deepPurple),
                 labelText: 'Условия и требования:',
               ),
             ),
@@ -163,6 +192,10 @@ class PlaceholderWidget extends StatelessWidget {
           if(index == 1) ...[
           SizedBox(height: 16.0),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.deepPurple,
+              onPrimary: Colors.white,
+            ),
             onPressed: () {
               add(context);
             },

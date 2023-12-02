@@ -63,7 +63,7 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.deepPurple,
-          title: Text('Список объявлений'),
+          title: Text('Список объявлений', style: TextStyle(color: Colors.white)),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -119,6 +119,10 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                                     if(data.user?.id != userId)...[
                                       SizedBox(height: 8),
                                       ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.deepPurple,
+                                          onPrimary: Colors.white,
+                                        ),
                                         child: Text('Отклик'),
                                         onPressed: () {
                                           addResponse(data.id, context);

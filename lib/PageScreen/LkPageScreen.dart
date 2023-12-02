@@ -88,7 +88,7 @@ class _LkPageScreenState extends State<LkPageScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text('Профиль'),
+        title: Text('Профиль',style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
@@ -126,6 +126,11 @@ class _LkPageScreenState extends State<LkPageScreen> {
             ),
             SizedBox(height: 16),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                onPrimary: Colors.white,
+                fixedSize: Size(200, 35),
+              ),
               onPressed: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
@@ -138,6 +143,11 @@ class _LkPageScreenState extends State<LkPageScreen> {
             if (user != null && user!.roles.contains("ROLE_USER")) ...[
               SizedBox(height: 16),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  onPrimary: Colors.white,
+                  fixedSize: Size(200, 35),
+                ),
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
@@ -151,6 +161,11 @@ class _LkPageScreenState extends State<LkPageScreen> {
             if (user != null && user!.roles.contains("ROLE_USER")) ...[
               SizedBox(height: 16),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  onPrimary: Colors.white,
+                  fixedSize: Size(200, 35),
+                ),
                 onPressed: () {
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(

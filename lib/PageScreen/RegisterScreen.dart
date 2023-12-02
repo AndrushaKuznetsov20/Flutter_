@@ -14,7 +14,7 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text('Регистрация'),
+        title: Text('Регистрация',style: TextStyle(color: Colors.white)),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
@@ -24,12 +24,14 @@ class RegisterScreen extends StatelessWidget {
             TextField(
               controller: usernameController,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.deepPurple),
                 labelText: 'Имя',
               ),
             ),
             TextField(
               controller: emailController,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.deepPurple),
                 labelText: 'Email',
               ),
             ),
@@ -37,6 +39,7 @@ class RegisterScreen extends StatelessWidget {
             TextField(
               controller: numberPhoneController,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.deepPurple),
                 labelText: 'Номер телефона',
               ),
             ),
@@ -44,11 +47,16 @@ class RegisterScreen extends StatelessWidget {
               controller: passwordController,
               obscureText: true,
               decoration: InputDecoration(
+                labelStyle: TextStyle(color: Colors.deepPurple),
                 labelText: 'Пароль',
               ),
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                onPrimary: Colors.white,
+              ),
               onPressed: () {
                 register(context);
               },

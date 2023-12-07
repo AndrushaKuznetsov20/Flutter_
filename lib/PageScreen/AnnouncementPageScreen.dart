@@ -9,6 +9,7 @@ import 'package:untitled5/PageScreen/UserPageScreen.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 
 import '../Models/ModelUser.dart';
+import 'ResponseButton.dart';
 
 class AnnouncementPageScreen extends StatefulWidget {
   @override
@@ -82,31 +83,56 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        utf8.decode(data.name.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            'Наименование: ',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.name.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                       ]
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        utf8.decode(data.description.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Text(
+                            'Описание: ',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.description.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
-                      Text(
-                        'Условия и требования:',
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Text(
-                        utf8.decode(data.conditions_and_requirements.codeUnits),
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
+                          Text(
+                            'Условия и требования:',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            utf8.decode(data.conditions_and_requirements.codeUnits),
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ]
                       ),
                       FutureBuilder<int?>(
                         future: getUserId(),
@@ -118,16 +144,21 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
                                   children: [
                                     if(data.user?.id != userId)...[
                                       SizedBox(height: 8),
-                                      ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.deepPurple,
-                                          onPrimary: Colors.white,
-                                        ),
-                                        child: Text('Отклик'),
-                                        onPressed: () {
-                                          addResponse(data.id, context);
-                                        },
+                                      ResponseButton(
+                                        announcementId: data.id,
+                                        addResponse: addResponse,
                                       ),
+                                      // SizedBox(height: 8),
+                                      // ElevatedButton(
+                                      //   style: ElevatedButton.styleFrom(
+                                      //     backgroundColor: Colors.deepPurple,
+                                      //     onPrimary: Colors.white,
+                                      //   ),
+                                      //   child: Text('Отклик'),
+                                      //   onPressed: () {
+                                      //     addResponse(data.id, context);
+                                      //   },
+                                      // ),
                                     ],
                                     if(data.user?.id == userId) ...[
                                       SizedBox(height: 8),

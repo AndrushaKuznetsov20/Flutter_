@@ -7,6 +7,8 @@ import 'package:untitled5/PageScreen/UserPageScreen.dart';
 import 'package:untitled5/PageScreen/AdminPageScreen.dart';
 import 'dart:convert';
 
+import 'RegisterScreen.dart';
+
 class LoginScreen extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -90,18 +92,33 @@ class LoginScreen extends StatelessWidget {
        {
          if (role == 'ROLE_USER')
          {
+           ScaffoldMessenger.of(context).showSnackBar(
+             SnackBar(
+               content: Text(response.body),
+             ),
+           );
            Navigator.pushReplacement(
              context,
              MaterialPageRoute(builder: (context) => UserPageScreen()),
            );
          }
          if (role == 'ROLE_ADMIN') {
+           ScaffoldMessenger.of(context).showSnackBar(
+             SnackBar(
+               content: Text(response.body),
+             ),
+           );
            Navigator.pushReplacement(
              context,
              MaterialPageRoute(builder: (context) => AdminPageScreen()),
            );
          }
          if (role == 'ROLE_MODER') {
+           ScaffoldMessenger.of(context).showSnackBar(
+             SnackBar(
+               content: Text("Вы успешно авторизировались!"),
+             ),
+           );
            Navigator.pushReplacement(
              context,
              MaterialPageRoute(builder: (context) => ModerPageScreen()),
@@ -115,21 +132,80 @@ class LoginScreen extends StatelessWidget {
        }
      }
      else{
-       showDialog(
-         context: context,
-         builder: (context) => AlertDialog(
-           title: Text('Ошибка!'),
-           content: Text('Неверный логин или пароль!'),
-           actions: [
-             TextButton(
-               onPressed: () {
-                 Navigator.pop(context);
-               },
-               child: Text('OK'),
-             ),
-           ],
-         ),
-       );
+       if(response.statusCode == 204) {
+         showDialog(
+           context: context,
+           builder: (context) =>
+               AlertDialog(
+                 title: Text('Ошибка!'),
+                 content: Text('У вас нет аккаунта, хотите создать его ?'),
+                 actions: [
+                   TextButton(
+                     onPressed: () {
+                       Navigator.push(
+                         context,
+                         MaterialPageRoute(builder: (context) => RegisterScreen()),
+                       );
+                     },
+                     child: Text('Создать аккаунт'),
+                   ),
+                 ],
+               ),
+         );
+       }
+       else{
+         if(response.statusCode == 404)
+           {
+             showDialog(
+               context: context,
+               builder: (context) =>
+                   AlertDialog(
+                     title: Text('Ошибка!'),
+                     content: Text('Ваш аккаунт заблокирован ! Пожалуйста, создайте новый аккаунт.'),
+                     actions: [
+                       TextButton(
+                         onPressed: () {
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(builder: (context) => RegisterScreen()),
+                           );
+                         },
+                         child: Text('Создать аккаунт'),
+                       ),
+                     ],
+                   ),
+             );
+           }
+         else{
+           if(response.statusCode == 500)
+             {
+               showDialog(
+                 context: context,
+                 builder: (context) => AlertDialog(
+                   title: Text('Ошибка!'),
+                   content: Text('У Вас есть аккаунт ? Если да, то проверьте правильность введённых данных!'),
+                   actions: [
+                     TextButton(
+                       onPressed: () {
+                         Navigator.pop(context);
+                       },
+                       child: Text('OK'),
+                     ),
+                     TextButton(
+                       onPressed: () {
+                         Navigator.push(
+                             context,
+                             MaterialPageRoute(builder: (context) => RegisterScreen()),
+                         );
+                       },
+                       child: Text('У меня нет аккаунта, создать'),
+                     ),
+                   ],
+                 ),
+               );
+             }
+         }
+       }
      }
   }
 }

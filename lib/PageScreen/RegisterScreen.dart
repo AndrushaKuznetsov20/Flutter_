@@ -96,21 +96,21 @@ class RegisterScreen extends StatelessWidget {
     }
     else
     {
-   showDialog(
-     context: context,
-     builder: (context) => AlertDialog(
-       title: Text('Ошибка!'),
-       content: Text('Пользователь с таким именем уже существует!'),
-       actions: [
-         TextButton(
-           onPressed: () {
-             Navigator.pop(context);
-           },
-           child: Text('OK'),
-         ),
-       ],
-     ),
-   );
+     showDialog(
+       context: context,
+       builder: (context) => AlertDialog(
+         title: Text('Ошибка!'),
+         content: Text('Пользователь с таким именем уже существует!'),
+         actions: [
+           TextButton(
+             onPressed: () {
+               Navigator.pop(context);
+             },
+             child: Text('OK'),
+           ),
+         ],
+       ),
+     );
  }
 }
 }

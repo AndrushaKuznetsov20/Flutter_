@@ -39,7 +39,7 @@ class AdminPageScreenScreenState extends State<AdminPageScreen>
       });
     }
   }
-  Future<void> blockUser(int id) async {
+  Future<void> blockUser(int id, BuildContext context) async {
     final response = await http.put(Uri.parse('http://172.20.10.3:8092/api_users/block/$id'));
     if (response.statusCode == 200)
     {
@@ -51,7 +51,7 @@ class AdminPageScreenScreenState extends State<AdminPageScreen>
       listUsers();
     }
   }
-  Future<void> inBlockUser(int id) async {
+  Future<void> inBlockUser(int id, BuildContext context) async {
     final response = await http.put(Uri.parse('http://172.20.10.3:8092/api_users/inBlock/$id'));
     if (response.statusCode == 200)
     {
@@ -186,7 +186,7 @@ class AdminPageScreenScreenState extends State<AdminPageScreen>
                         ),
                         child: Text('Заблокировать'),
                         onPressed: () {
-                          blockUser(data.id);
+                          blockUser(data.id,context);
                         },
                       ),
                       SizedBox(height: 8),
@@ -197,7 +197,7 @@ class AdminPageScreenScreenState extends State<AdminPageScreen>
                         ),
                         child: Text('Разблокировать'),
                         onPressed: () {
-                          inBlockUser(data.id);
+                          inBlockUser(data.id,context);
                         },
                       ),
                       SizedBox(height: 8),

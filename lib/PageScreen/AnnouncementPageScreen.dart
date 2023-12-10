@@ -47,6 +47,17 @@ class AnnouncementPageScreenState extends State<AnnouncementPageScreen> {
         ),
       );
     }
+    else
+      {
+        if (response.statusCode == 500)
+          {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(response.body),
+              ),
+            );
+          }
+      }
   }
   @override
   void initState() {

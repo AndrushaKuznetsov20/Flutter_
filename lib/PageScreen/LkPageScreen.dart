@@ -5,6 +5,7 @@ import 'package:untitled5/Models/ModelUser.dart';
 import 'package:untitled5/PageScreen/MyAnnouncement.dart';
 import 'package:untitled5/PageScreen/MyResponses.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:untitled5/PageScreen/UserPageScreen.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -82,13 +83,20 @@ class _LkPageScreenState extends State<LkPageScreen> {
       throw Exception('Ошибка загрузки пользователя!');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text('Профиль',style: TextStyle(color: Colors.white)),
+        leading: user != null && user!.roles.contains("ROLE_USER")
+            ? IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserPageScreen()),);
+          },
+        )
+            : null,
       ),
       body: Padding(
         padding: EdgeInsets.all(16),

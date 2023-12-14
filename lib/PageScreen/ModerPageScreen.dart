@@ -144,7 +144,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
                       Row(
                         children: [
                           Text(
-                            'Условия и требованияв: ',
+                            'Условия и требования: ',
                             style: TextStyle(
                               color: Colors.black,
                             ),
@@ -180,7 +180,7 @@ class ModerPageScreenState extends State<ModerPageScreen> {
                           backgroundColor: Colors.deepPurple,
                           onPrimary: Colors.white,
                         ),
-                        child: Text('Модерировать'),
+                        child: Text('Опубликовать'),
                         onPressed: () {
                           moderData(data.id,context);
                         },

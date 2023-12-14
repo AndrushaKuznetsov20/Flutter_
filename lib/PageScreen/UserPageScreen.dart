@@ -44,6 +44,13 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.deepPurple,
         title: Text('Поиск вакансий',style: TextStyle(color: Colors.white)),
         actions: [
+          if(_currentIndex != 0)
+          IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => UserPageScreen()));
+            },
+          ),
           IconButton(
             icon: Icon(Icons.account_circle),
             onPressed: () {
@@ -122,6 +129,7 @@ class PlaceholderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(16.0),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -131,18 +139,22 @@ class PlaceholderWidget extends StatelessWidget {
           ),
           SizedBox(height: 16.0),
           if(index == 0) ...[
-            Container(
-              child: Row(
-                children: [
-                  Image.network(
-                    'https://sun6-20.userapi.com/s/v1/ig2/GolcmJFBPjSoP15Fzw-7icbKxxReKYBAHsDsy4QjoV-Un11unj0S6XAvk7V1BfNTDlGgVt_62371foFKE6MG1JZy.jpg?size=957x957&quality=95&crop=42,0,957,957&ava=1',
-                    width: 328,
-                    height: 375,
-                  ),
-                ],
+            SingleChildScrollView(
+              child: Container(
+                height: 278,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Image.network(
+                        'https://sun6-20.userapi.com/s/v1/ig2/GolcmJFBPjSoP15Fzw-7icbKxxReKYBAHsDsy4QjoV-Un11unj0S6XAvk7V1BfNTDlGgVt_62371foFKE6MG1JZy.jpg?size=957x957&quality=95&crop=42,0,957,957&ava=1',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            SizedBox(width:30),
+            SizedBox(width:20),
             Column(
               children: [
                 ElevatedButton(
